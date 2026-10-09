@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Task Manager</title>
+</head>
+<body>
+    <h1>Welcome, {{ username }}!</h1>
+
+    <h2>My Tasks</h2>
+     <p>
+        <a href="{% url 'add_task' %}">+ Add New Task</a>
+     </p>
+
+    <ul>
+    {% for task in tasks %}
+        <li>
+            <strong>{{ task.title }}</strong>
+            <p>{{ task.description }}</p>
+
+            {% if task.completed %}
+                <span>Completed</span>
+            {% else %}
+                <span>Not completed</span>
+            {% endif %}
+
+            <a href="{% url 'edit_task' task.id %}">Edit</a>
+        </li>
+    {% empty %}
+        <li>No tasks yet. Add one in Django Admin!</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
