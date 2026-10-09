@@ -47,3 +47,17 @@ def edit_task(request, task_id):
         "tasks/edit_task.html",
         {"form": form, "task": task},
     )
+
+
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+
+    if request.method == "POST":
+        task.delete()
+        return redirect("home")
+
+    return render(
+        request,
+        "tasks/delete_task.html",
+        {"task": task},
+    )
